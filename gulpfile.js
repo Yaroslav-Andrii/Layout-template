@@ -8,7 +8,6 @@
  * 1. gulp - developing in runtime, reload browser, rebuilding on file change
  * 2. gulp build - build project for production
  * 3. gulp svg - create sprite for icons from './src/img/icon sprite' dir
- * 4. gulp fontStyle - add styles for fonts in file './src/_scss/_fonts.scss'
  */
 
 const gulp = require('gulp');
@@ -121,36 +120,6 @@ function fonts() {
 
 }
 
-async function fontsStyle() {
-	let fileContent = fs.readFileSync(source + '/_scss/_fonts.scss');
-
-	if (fileContent == '') {
-		fs.writeFile(source + '/_scss/_fonts.scss', '', () => {});
-		
-		return fs.readdir(path.build.fonts, (err, items) => {
-			if (items) {
-				
-				let curentFontName;
-				
-				for (let i = 0; i < items.length; i++) {
-					let fontName = items[i].split('.');
-					fontName = fontName[0];
-
-					if (curentFontName != fontName) {
-						fs.appendFile(
-							source + '/_scss/_fonts.scss', 
-							'@include font("' + fontName + '", "' + fontName + '", "400", "normal");\r\n', 
-							() => {}
-						);
-					}
-					
-					curentFontName = fontName;
-				}
-			}
-		})
-	}
-}
-
 function svg() {
 	return gulp.src('./src/img/iconsprite/*.svg')
 		.pipe( 
@@ -186,11 +155,9 @@ function watch() {
 
 
 // ==== Gulp tasks commands ====
-gulp.task('build', gulp.series(clean, fontsStyle, gulp.parallel(html, style, script, images, fonts)));
+gulp.task('build', gulp.series(clean, gulp.parallel(html, style, script, images, fonts)));
 gulp.task('default', gulp.series('build', watch));
 
-
-exports.fontsStyle = fontsStyle;
 exports.clean = clean;
 exports.svg = svg; 
 
