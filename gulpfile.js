@@ -47,7 +47,7 @@ const path = {
 		css: source + '/_scss/style.scss',
 		scripts: [source + '/scripts/**/*.js', '!' + source + '/_*.js'],
 		img: source + '/img/**/*.{jpg,png,svg,gif,ico,webp}',
-		fonts: source + '/fonts/*.ttf',
+		fonts: source + '/fonts/**/*.{woff,woff2,eot,ttf,svg}',
 		libs: source + '/libs'
 	}, 
 	watch: {
@@ -111,13 +111,8 @@ function style() {
 }
 
 function fonts() {
-	gulp.src(path.src.fonts)
-			.pipe( ttf2woff() )
-			.pipe( gulp.dest(path.build.fonts) );
 	return gulp.src(path.src.fonts)
-			.pipe( ttf2woff2() )
-			.pipe( gulp.dest(path.build.fonts) );
-
+	.pipe( gulp.dest(path.build.fonts) );
 }
 
 function svg() {
