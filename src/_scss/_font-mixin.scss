@@ -1,8 +1,8 @@
-@mixin font($font_name, $file_name, $weight, $style) {
+@mixin font($font_name, $rout, $weight, $style) {
 	@font-face {
 		font-family: $font_name;
-		font-display: swap;
-		src: url("../fonts/#{$file_name}.woff") format("woff"), url("../fonts/#{$file_name}.woff2") format("woff2");
+		src: url('#{$rout}.eot');
+		src: url('#{$rout}.woff') format('woff'), url('#{$rout}.ttf') format('truetype'), url('#{$rout}.svg') format('svg');
 		font-weight: #{$weight};
 		font-style: #{$style};
 	}
