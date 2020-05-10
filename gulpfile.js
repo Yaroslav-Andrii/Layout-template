@@ -23,8 +23,6 @@ const uglify = require('gulp-uglify-es').default;
 const concat = require('gulp-concat');
 const imagemin = require('gulp-imagemin');
 const svgSprite = require('gulp-svg-sprite');
-const ttf2woff = require('gulp-ttf2woff');
-const ttf2woff2 = require('gulp-ttf2woff2');
 
 const del = require('del');
 const browserSync = require('browser-sync').create();
