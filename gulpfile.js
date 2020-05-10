@@ -38,21 +38,21 @@ const path = {
 		scripts: public + '/scripts',
 		img: public + '/img',
 		fonts: public + '/fonts',
-		libs: public + '/libs'
+		libs: public + '/libs',
 	},
 	src: {
 		html: [source + '/*.html', '!' + source + '/_*.html'],
 		css: source + '/_scss/style.scss',
 		scripts: [source + '/scripts/**/*.js', '!' + source + '/_*.js'],
-		img: source + '/img/**/*.{jpg,png,svg,gif,ico,webp}',
+		img: [source + '/img/**/*.{jpg,png,svg,gif,ico,webp}', '!' + source + '/img/iconsprite'],
 		fonts: source + '/fonts/**/*.{woff,woff2,eot,ttf,svg}',
-		libs: source + '/libs'
+		libs: source + '/libs',
 	}, 
 	watch: {
 		html: source + '/**/*.html',
 		css: source + '/_scss/**/*.scss',
 		scripts: source + '/scripts/**/*.js',
-		img: source + '/img/**/*.{jpg,png,svg,gif,ico,webp}'
+		img: [source + '/img/**/*.{jpg,png,svg,gif,ico,webp}', '!' + source + '/img/iconsprite'],
 	},
 	clean: './' + public + '/',
 }
@@ -120,12 +120,12 @@ function svg() {
 				mode: {
 					stack: {
 						sprite: '../icons/icons.svg',
-						example: true,
+						example: false,
 					}
 				}
 			})
 		)
-		.pipe( gulp.dest(path.build.img) );
+		.pipe( gulp.dest('./src/img/') );
 }
 
 function clean() {
