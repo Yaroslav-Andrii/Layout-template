@@ -140,10 +140,10 @@ function watch() {
 		notify: false,
 	});
 
-	gulp.watch(path.watch.img, images).on('change', browserSync.reload);
-	gulp.watch(path.watch.scripts, script).on('change', browserSync.reload);
-	gulp.watch(path.watch.css, style).on('change', browserSync.reload);
-	gulp.watch(path.watch.html, html).on('change', browserSync.reload);
+	gulp.watch(path.watch.img).on('change', gulp.series(images, browserSync.reload));
+	gulp.watch(path.watch.scripts).on('change', gulp.series(script, browserSync.reload));
+	gulp.watch(path.watch.css).on('change', gulp.series(style, browserSync.reload));
+	gulp.watch(path.watch.html).on('change', gulp.series(html, browserSync.reload));
 }
 
 
